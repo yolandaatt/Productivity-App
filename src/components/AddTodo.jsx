@@ -17,7 +17,7 @@ function AddTodo({addNewTodo}) {
         <form className="addTodo" onSubmit={handleSubmit}>
             <input type="text" className="todoInput" value={value} placeholder="Write a new task" onChange={(e) =>(setValue(e.target.value))}/>
             <button type="submit" className="newTodoBtn">Add Task</button>
-        </form>
+        </form> 
         </>
 
     )
