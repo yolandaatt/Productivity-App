@@ -41,6 +41,26 @@ function App() {
     title: "Måla",
     priority: "låg",
     rep: 5,
+  },
+  {
+    title: "Mindfullness",
+    priority: "medel",
+    rep: 1,
+  },
+  {
+    title: "Simma",
+    priority: "låg",
+    rep: 2,
+  },
+  {
+    title: "Umgås med kompisar",
+    priority: "hög",
+    rep: 7,
+  },
+  {
+    title: "Lägga sig tidigt",
+    priority: "hög",
+    rep: 5,
   }
   ]
 
@@ -69,7 +89,7 @@ function App() {
     <>
 
 
-    <h1> Productivity Assistant Application</h1>
+    <h1 style={{fontFamily:"fantasy", color:"pink", textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}> Productivity Assistant Application</h1>
 
 
     <Navigation/>

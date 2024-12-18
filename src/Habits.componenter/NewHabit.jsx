@@ -31,15 +31,23 @@ function NewHabit({addHabit}) {
         <input type="text" placeholder="Titel" 
         onChange= {e => setTitle(e.target.value)}/>
         <br/>
-        <input type="text" placeholder="Prio" 
-        onChange= {e => setPriority(e.target.value)}/>
+
+        <label for="prio" style={{backgroundColor:"white", color:"grey", border:"solid 1px"}}>Välj prioritet: </label>
+        <select id="prio" style={{width:"79px"}} onChange={(e) => setPriority(e.target.value)} value={priority}>
+        <option value="">Välj </option>
+        <option value="låg">Låg</option>
+        <option value="medel">Medel</option>
+        <option value="hög">Hög</option>
+        </select>
         <br/>
-        <input type="text" placeholder="Repetitioner"
+
+        <input type="number" placeholder="Repetitioner"
         onChange= {e => setRep(e.target.value)}/>
+
         <br/>
-        <button onClick={handleAddHabit}>Lägg till Rutin</button>        
+        <button style={{margin:"10px"}} onClick={handleAddHabit}>Lägg till Rutin</button>        
         <br></br>
-        <button style={{color:"gray", fontSize:"smaller"}} onClick={() => nav(-1)}>Avbryt</button>
+        <button style={{color:"gray", fontSize:"small"}} onClick={() => nav(-1)}>Avbryt</button>
         
         </>
     )

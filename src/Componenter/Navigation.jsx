@@ -6,7 +6,9 @@ const Navigation = () => {
         <>
         <nav>
       
+                 
                 <Link to="/">Startsida</Link>
+                
 
         </nav>
         </>
