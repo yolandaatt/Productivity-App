@@ -8,12 +8,17 @@ import EditTodo from "./EditTodo";
 function TodoWrapper() {
     
     const [todos, setTodos] = useState([])
+    
+  
 
     const addNewTodo = todo => {
         const {title, description, timeEstimate, category, deadline, status} = todo
-        setTodos([...todos, {id: uuidv4(), task: todo, completed: false, isEditing: false}])
+        const parsedDeadline = new Date(deadline);
+        setTodos([...todos, {id: uuidv4(), task: {title, description, timeEstimate, category, deadline: parsedDeadline, status}, todo, completed: false, isEditing: false}])
         console.log(todos)
     }
+
+
 
     const changeStatus = id => {
         setTodos(todos.map(todo => todo.id === id ? {...todo, task: {...todo.task, status: todo.task.status === "Completed" ? "Not started yet" : "Completed"}} : todo ));
