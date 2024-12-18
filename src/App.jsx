@@ -9,6 +9,9 @@ import Navigation from './Componenter/Navigation'
 import Events from "./Components/Events";
 import EventForm from "./Components/EventForm";
 import StartPage from "./Components/StartPage";
+import TodoWrapper from "./Components/TodoWrapper";
+import { v4 as uuidv4 } from 'uuid';
+
 
 function App() {
 
@@ -80,6 +83,8 @@ function App() {
       <Route path = "/s" element = {<StartPage/>} />
         <Route path = "/EventForm" element= {<EventForm addEvent={addEvent} />} />
         <Route path = "/Events" element = {<Events events = {events}/>} /> 
+        <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
+
     </Routes>
 
     </>
