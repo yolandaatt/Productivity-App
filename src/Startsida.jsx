@@ -13,9 +13,9 @@ function Startsida({habits}) {
 
         <h1>STARTSIDA</h1>
 
-    <div style={{display:"flex", justifyContent:"center", justifyContent:"space-evenly"}}>
+    <div style={{display:"flex", justifyContent:"center"}}>
     
-        <div className="Rutiner" style={{border:"solid 2px", width:"150px"}}>
+        <div className="Rutiner" style={{border:"solid 2px", width:"150px", padding:"20px", margin:"20px"}}>
             <h2 style={{fontFamily:"fantasy", color:"pink", 
                 textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>
                     RUTINER</h2>
@@ -37,7 +37,7 @@ function Startsida({habits}) {
         </div>
             <br></br>
 
-        <div className="Event" style={{border:"solid 2px", width:"150px"}}>
+        <div className="Event" style={{border:"solid 2px", width:"150px", padding:"20px", margin:"20px"}}>
                 <h2 style={{fontFamily:"fantasy", color:"pink", 
                 textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>
                     HÄNDELSER</h2>
@@ -45,7 +45,7 @@ function Startsida({habits}) {
         </div>
             <br></br>
 
-        <div className="Todo" style={{border:"solid 2px", width:"150px"}}>
+        <div className="Todo" style={{border:"solid 2px", width:"150px", padding:"20px", margin:"20px"}}>
                 <h2 style={{fontFamily:"fantasy", color:"pink", 
                     textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>
                         ATT GÖRA</h2>

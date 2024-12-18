@@ -89,7 +89,9 @@ function App() {
     <>
 
 
-    <h1 style={{fontFamily:"fantasy", color:"pink", textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}> Productivity Assistant Application</h1>
+    <h1 style={{fontFamily:"fantasy", color:"pink", 
+      textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}> 
+      Productivity Assistant Application</h1>
 
 
     <Navigation/>

@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom" 
-
+import { useState } from "react";
 
 function Habitsx({habits, setHabits}) {
 
     const navigation = useNavigate()
-
 
     const radera = (index) => {
     
