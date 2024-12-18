@@ -3,7 +3,6 @@ import AddTodo from "./AddTodo"
 import { v4 as uuidv4 } from 'uuid';
 import Todo from "./Todo";
 import EditTodo from "./EditTodo";
-import Multifilters from "./Multifilters";
 
 
 function TodoWrapper() {
