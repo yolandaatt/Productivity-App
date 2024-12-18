@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
 import Startsida from './Startsida'
@@ -10,10 +9,10 @@ import Events from "./Components/Events";
 import EventForm from "./Components/EventForm";
 import StartPage from "./Components/StartPage";
 import TodoWrapper from "./Components/TodoWrapper";
-import { v4 as uuidv4 } from 'uuid';
 
 
-function App() {
+
+function App() { 
 
 
   const defaultHabits = [
