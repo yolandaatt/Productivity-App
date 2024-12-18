@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
 import Startsida from './Startsida'
+import './App.css'
 import Habitsx from './Habits.componenter/Habits'
 import NewHabit from './Habits.componenter/NewHabit'
 import Navigation from './Componenter/Navigation'
