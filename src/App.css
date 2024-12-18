@@ -1,0 +1,154 @@
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+  
+  .todoWrapper {
+    background: #656569;
+    margin-top: 5rem;
+    padding: 2rem;
+    border-radius: 5px;
+  }
+  
+  .addTodo {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .todoInput {
+    outline: none;
+    background: none;
+    border: 1px solid #eeebf5;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    width: 300px;
+    color: #fff;
+  }
+  
+  .todoInput::placeholder {
+    color: #ffffff4d;
+  }
+  
+  .newTodoBtn {
+    background: #020007;
+    color: #fff;
+    border: none;
+    padding: 0.55rem;
+    cursor: pointer;
+  }
+  
+  .todoList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #060607;
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+  
+  .fa-trash {
+    margin-left: 0.75rem;
+  }
+  
+  .incompleted {
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .completed {
+    color: #d4cee6;
+    text-decoration: line-through;
+    cursor: pointer;
+  }
+  
+  .edit-icon,
+  .delete-icon {
+    cursor: pointer;
+  }
+  
+  .todoList {
+    cursor: pointer
+    
+  }
+  
+  .statusInput {
+    outline: none;
+    background: none;
+    border: 1px solid #eeebf5;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    width: 300px;
+    color: #fff;
+    appearance: none; 
+    background-color: #656569; 
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .statusInput option {
+    background: #656569;
+  }
+  
+  
+  .categoryInput {
+    outline: none;
+    background: none;
+    border: 1px solid #eeebf5;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    width: 300px;
+    color: #fff;
+    appearance: none; 
+    background-color: #656569; 
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .categoryInput option {
+    background: #656569;
+  }
+  
+  
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+  
+  .card {
+    padding: 2em;
+  }
+  
+  .read-the-docs {
+    color: #888;
+  };
+     

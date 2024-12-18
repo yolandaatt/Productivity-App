@@ -32,7 +32,6 @@ function AddTodo({addNewTodo}) {
             <input type="date" className="todoInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
             <select className="statusInput" value={status} onChange={(e) => setStatus(e.target.value)}>
                  <option value="Not started yet">Not started yet</option> 
-                 <option value="In progress">In progress</option> 
                  <option value="Completed">Completed</option>
                  </select>
 
