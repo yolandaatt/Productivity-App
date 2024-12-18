@@ -13,7 +13,7 @@ const navigate = useNavigate();
             <button onClick = {() => navigate("/EventForm")}> Lägg till händelse</button>
     </div>
     )
-}
+} 
 
-export default StartPage;
+export default StartPage; 
   

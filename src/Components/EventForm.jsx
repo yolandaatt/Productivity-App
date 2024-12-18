@@ -12,7 +12,7 @@ function EventForm ({addEvent}) {
     const [endDate, setEndDate] = useState("");
 
     const navigate = useNavigate();
-
+ 
     const handleSubmit = (event) => {
         event.preventDefault ();
     

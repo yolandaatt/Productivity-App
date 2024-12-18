@@ -10,7 +10,7 @@ function Events ({events}) {
 
     const handleDelete = (deleteEvent) => {
         const removedEvents = updatedEvents.filter ((_, index) => index !== deleteEvent)
-        setEvents(removedEvents);
+        setEvents(removedEvents); 
 
     }
     
