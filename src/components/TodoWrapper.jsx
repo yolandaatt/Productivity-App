@@ -3,7 +3,7 @@ import AddTodo from "./AddTodo"
 import { v4 as uuidv4 } from 'uuid';
 import Todo from "./Todo";
 import EditTodo from "./EditTodo";
-import Multifilters from "./Multifilters";
+
 
 
 function TodoWrapper() {
@@ -38,7 +38,6 @@ function TodoWrapper() {
         <div className="todoWrapper">
             <h1>Todo List!</h1>
         <AddTodo addNewTodo={addNewTodo}/>
-        <Multifilters todos = {todos}/>
         {todos.map((todo, index) => (
             todo.isEditing  ? (<EditTodo key={index} task={todo} editTask={editTask} />)
             :
