@@ -16,4 +16,3 @@ const navigate = useNavigate();
 } 
 
 export default StartPage; 
-  
