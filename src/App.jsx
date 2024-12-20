@@ -10,10 +10,93 @@ import Events from "./Components/Events";
 import TodoWrapper from "./Components/TodoWrapper";
 import AddEvent from './Components/AddEvent'
 import Login from './Login'
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 function App() { 
   const navigate = useNavigate()
+
+  const handleLogin = (user) => {
+    setCurrentUser(user)
+    navigate("/start")
+  }
+
+  const handleLogout = () => {
+    setCurrentUser(null)
+    navigate("/")
+  }
+
+  const [currentUser, setCurrentUser] = useState(null);
+
+
+  const [todos, setTodos] = useState([]);
+
+
+  const addNewTodo = (todo) => {
+
+    if (!currentUser) {
+      alert("You need to sign in first!");
+      return;
+  }
+      const {title, description, timeEstimate, category, deadline, status} = todo
+      const parsedDeadline = new Date(deadline)
+      const newTodo = {id: uuidv4(), userId: currentUser.userId, task: {title, description, timeEstimate, category, deadline: parsedDeadline, status},
+        completed: false,
+        isEditing: false
+      }
+    
+      setTodos([...todos, newTodo])
+      
+  }
+
+
+  const changeStatus = id => {
+    setTodos(prevTodos => prevTodos.map(todo => todo.id === id ? { ...todo, task: { ...todo.task, status: todo.task.status === "Completed" ? "Not started yet" : "Completed"}} : todo)
+    );
+};
+
+
+const deleteTodo  = id => {
+  setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));
+};
+
+
+const reDoTodo = id => {
+  setTodos(prevTodos => prevTodos.map(todo => todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo)
+  );
+}
+
+const editTask = (task, id) => {
+  setTodos(prevTodos => prevTodos.map(todo => todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo)
+  );
+}
+
+const loadTodosFromLocalStorage = (userId) => {
+  const savedTodos = localStorage.getItem(`todos_${userId}`)
+  if (savedTodos) {
+      return JSON.parse(savedTodos)
+  }
+  return []
+}
+
+
+  const saveTodosToLocalStorage = (userId, todos) => {
+  localStorage.setItem(`todos_${userId}`, JSON.stringify(todos)) }
+
+  useEffect(() => {
+    if (currentUser) {
+      setTodos(loadTodosFromLocalStorage(currentUser.userId));
+    }
+  }, [currentUser]);
+
+useEffect(() => {
+  if (currentUser) {
+    saveTodosToLocalStorage(currentUser.userId, todos)
+  }
+}, [todos, currentUser])
+
+
 
   const defaultusers = [
     {
@@ -103,7 +186,7 @@ function App() {
       return savedHabits ? JSON.parse(savedHabits) : defaultHabits })
 
   
-  const [currentUser, setCurrentUser] = useState(null);
+
 
   useEffect( () => {
     localStorage.setItem("habits", JSON.stringify(habits))
@@ -114,15 +197,7 @@ function App() {
         localStorage.setItem("users", JSON.stringify(defaultusers));
     }}, []);
 
-  const handleLogin = (user) => {
-    setCurrentUser(user)
-    navigate("/start")
-  }
-
-  const handleLogout = () => {
-    setCurrentUser(null)
-    navigate("/")
-  }
+ 
 
   const getUserHabits = () => {
     if(!currentUser) return []
@@ -156,13 +231,14 @@ function App() {
     <Routes>
      
     <Route path="/" element = {<Login onLogin={handleLogin}/>} />
-      <Route path="/start" element={<Startsida habits={getUserHabits()}/>} />
+      <Route path="/start" element={<Startsida habits={getUserHabits()} todos={todos}/>} />
       <Route path="/habits" element={<Habitsx habits={getUserHabits()} setHabits={setHabits}/>}/>
       <Route path="/newhabit" element={<NewHabit addHabit={addHabit}/>}/>
       
         <Route path = "/AddEvent" element= {<AddEvent addEvent={addEvent} />} />
         <Route path = "/Events" element = {<Events events = {events}/>} /> 
-        <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
+        <Route path = "/TodoWrapper" element = {<TodoWrapper currentUser={currentUser} setTodos={setTodos} addNewTodo={addNewTodo}
+        changeStatus = {changeStatus} deleteTodo ={deleteTodo} reDoTodo={reDoTodo} editTask= {editTask} todos={todos}/>} />
 
     </Routes>
 

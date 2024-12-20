@@ -10,6 +10,7 @@ function AddTodo({addNewTodo}) {
     const [status, setStatus] = useState('Not started yet')
 
     const handleSubmit = e => {
+        console.log("Hej");
         e.preventDefault()
         addNewTodo({title, description, timeEstimate, category, deadline: new Date(deadline), status})
 

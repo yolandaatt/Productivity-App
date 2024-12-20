@@ -1,12 +1,15 @@
+
 import { useNavigate } from "react-router-dom" 
 
 
-function Startsida({habits }) {
+function Startsida({habits, todos}) {
 
     const navigation = useNavigate()
 
     const sshabits = [...habits]
     .sort((a,b) => b.rep - a.rep)
+
+    const sstodos = [...todos]
 
     return(
         <>
@@ -45,13 +48,48 @@ function Startsida({habits }) {
         </div>
             <br></br>
 
-        <div className="Todo" style={{border:"solid 2px", width:"150px", padding:"20px", margin:"20px"}}>
-                <h2 style={{fontFamily:"fantasy", color:"pink", 
-                    textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>
-                        ATT GÖRA</h2>
-            <button onClick ={() => navigation ("/TodoWrapper")}>Lägg till Todo </button> 
-        </div>
 
+            <div className="Todo" style={{ border: "solid 2px", width: "150px", padding: "20px", margin: "20px" }}>
+    <h2
+        style={{
+            fontFamily: "fantasy",
+            color: "pink",
+            textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
+        }}
+    >
+        ATT GÖRA
+    </h2>
+
+    {sstodos.length === 0 ? (
+        <p>Inga Todos än! Lägg till några för att komma igång :D</p> 
+    ) : (
+        <ul>
+            {sstodos.map((todo, i) => (
+                <li key={i}>
+                    <h5 style={{ color: "#080623" }}>
+                        <h3
+                            style={{
+                                fontFamily: "fantasy",
+                                color: "pink",
+                                textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
+                            }}
+                        >
+                            {todo.task.title}
+                        </h3>
+                        {todo.task.description && <p>{todo.task.description}</p>}
+                        Deadline: {new Date(todo.task.deadline).toLocaleDateString()}
+                    </h5>
+                </li>
+            ))}
+        </ul>
+    )}
+
+
+    <button onClick={() => navigation("/TodoWrapper")}>Lägg till Todo</button>
+</div>
+
+
+       
     </div>
 
         
