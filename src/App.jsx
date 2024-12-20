@@ -7,9 +7,11 @@ import Habitsx from './Habits.componenter/Habits'
 import NewHabit from './Habits.componenter/NewHabit'
 import Navigation from './Componenter/Navigation'
 import Events from "./Components/Events";
-import AddEvent from './Components/AddEvent'
 import TodoWrapper from "./Components/TodoWrapper";
 import Login from './Login'
+import Registrera from './Registrera'
+import Quote from './Componenter/Randome'
+
 
 
 
@@ -21,22 +23,19 @@ function App() {
     {
       profil: "Melissa", 
       userId: 1,
-      username: "Melissa_96", 
-      password:"123",
+      inlog: {username: "Melissa_96", password:"123"},
 
     },
     {
       profil: "Ellen", 
       userId: 2,
-      username: "Ellen_97", 
-      password: "456"
+      inlog: {username: "Ellen_97", password: "456"}
     
     },
     {
       profil: "Yolanda", 
       userId: 3,
-      username: "Yolanda_98", 
-      password: "789",
+      inlog: {username: "Yolanda_98", password: "789"}
     }
   ]
 
@@ -104,51 +103,64 @@ function App() {
   ]
 
 
-
   const [habits, setHabits] = useState(() => {
-      const savedHabits = localStorage.getItem("habits")
-      return savedHabits ? JSON.parse(savedHabits) : defaultHabits })
+    const savedHabits = localStorage.getItem("habits");
+    return savedHabits ? JSON.parse(savedHabits) : defaultHabits;
+  });
 
-      const addHabit = (habit) => {
-        setHabits([...habits, habit])
-      }
-    
-      const addUser = (user) => {
-        setUsers([...users, user])
-      }
+  const [currentUser, setCurrentUser] = useState(null);
 
-  
-  const [currentUser, setCurrentUser] = useState(() => {
-    const savedUser = localStorage.getItem("currentUser")
-    return savedUser ? JSON.parse(savedUser) : null
-})
-
- 
-
-  useEffect( () => {
-    localStorage.setItem("habits", JSON.stringify(habits))
-  }, [habits])
+  const [events, setEvents] = useState(() => {
+    const savedEvents = localStorage.getItem("events");
+    return savedEvents ? JSON.parse(savedEvents) : [];
+  });
 
   useEffect(() => {
-        localStorage.setItem("users", JSON.stringify(users));
-    }, [users]);
+    localStorage.setItem("habits", JSON.stringify(habits));
+  }, [habits]);
 
+  useEffect(() => {
+    localStorage.setItem("events", JSON.stringify(events));
+  }, [events]);
 
   const handleLogin = (user) => {
-    setCurrentUser(user)
-    navigate("/start")
-  } 
+    setCurrentUser(user);
+    navigate("/start");
+  };
 
   const handleLogout = () => {
-    setCurrentUser(null)
-    localStorage.removeItem("currentUser")
-    navigate("/")
-  }
+    setCurrentUser(null);
+    navigate("/");
+  };
 
   const getUserHabits = () => {
-    if(!currentUser) return []
-    return habits.filter((habit) => habit.userId === currentUser.userId)
+    return currentUser ? habits.filter((habit) => habit.userId === currentUser.userId) : [];
+  };
+
+  const getUserEvents = () => {
+    return currentUser ? events.filter((event) => event.userId === currentUser.userId) : [];
+  };
+
+  const addEvent = (newEvent) => {
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
+  };
+
+  const addUser = (user) => {
+    setUsers((prevUsers) => [...prevUsers, user]);
+  };
+
+  const addHabit = (habit) => {
+    setHabits ([...habits, habit])
   }
+
+  const newHabitId = () => {
+    return currentUser ? currentUser.userId : null
+  }
+
+  const newEventId = () => {
+    return currentUser ? currentUser.userId: null
+   };
+ 
 
 
   return (
@@ -159,16 +171,8 @@ function App() {
       textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}> 
       Productivity Assistant Application</h1>
 
-    {location.pathname !== "/" && location.pathname !== "/reg" && <Navigation/>}
 
-    {currentUser && 
-    <div>
-      <h2>Välkommen, {currentUser.profil}</h2>
-      <Quote/>
-    </div>
-      
-      }
-    
+    <Navigation/>
 
 
     <Routes>
@@ -176,24 +180,26 @@ function App() {
     <Route path="/" element = {<Login onLogin={handleLogin}/>} />
       <Route path="/start" element={<Startsida habits={getUserHabits()} events ={getUserEvents()}/>} />
       <Route path="/habits" element={<Habitsx habits={getUserHabits()} setHabits={setHabits}/>}/>
-      <Route path="/newhabit" element={<NewHabit addHabit={addHabit}/>}/>
+      <Route path="/newhabit" element={<NewHabit addHabit={addHabit} newHabitId={newHabitId}/>}/>
       
         
-        <Route path = "/Events" element = {<Events getUserEvents = {getUserEvents()} currentUser= {currentUser}/>} /> 
-         
+        <Route path = "/Events" element = {<Events events = {getUserEvents()} currentUser= {currentUser} addEvent={addEvent()} newEventId={newEventId}/>} /> 
+        
         
         <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
+        <Route path = "/reg" element= {<Registrera addUser={addUser}/>}/>
 
     </Routes>
 
-<br></br>
-<br></br>
     {currentUser && 
-    <button style={{backgroundColor:"pink", fontFamily:"fantasy"}} onClick={handleLogout}>Logga ut</button>
-    }
-
+    <div>
+      <h2>Välkommen, {currentUser.profil}</h2>
+      <button onClick={handleLogout}>Logga ut</button>
+    </div>
+      
+      }
 
     </>
   )
 }
-export default App
+export default App 
