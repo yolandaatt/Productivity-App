@@ -15,7 +15,7 @@ function Startsida({habits, events }) {
     });
 
     return(
-        <>
+        <> 
 
         <h1>STARTSIDA</h1>
 
@@ -27,7 +27,6 @@ function Startsida({habits, events }) {
                     RUTINER</h2>
 
             {sshabits.slice(0,3).map((habit, i) => <p key = {i}>
-
                 <h5 style={{color:"#080623"}}>
                     <h2 style={{fontFamily:"fantasy", color:"pink", 
                 textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>{habit.title}</h2>
@@ -48,27 +47,6 @@ function Startsida({habits, events }) {
                 textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>
                     HÄNDELSER</h2>
 
-                    {sortedEvents.slice(0, 3).map((event, i) => (
-                        <div key={i}>
-                            <h5>
-                                <h2
-                                    style={{
-                                        fontFamily: "fantasy",
-                                        color: "pink",
-                                        textShadow:
-                                            "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
-                                    }}
-                                >
-                                    {event.name}
-                                </h2>
-                                Start: {event.startDate} {event.startTime}
-                                <br />
-                                Slut: {event.endDate} {event.endTime}
-                            </h5>
-                        </div>
-                    ))}
-
-            <button onClick = {() => navigation("/Events")}> Lägg till händelse</button>
         </div>
             <br></br>
 

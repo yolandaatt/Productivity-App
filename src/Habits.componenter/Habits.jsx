@@ -98,7 +98,7 @@ function Habitsx({habits, setHabits}) {
                 <option value="">Välj här</option>
                 <option value="låg">Låg</option>
                 <option value="medel">Medel</option>
-                <option value="hög">Hög</option> 
+                <option value="hög">Hög</option>  
             </select>
 
             {SFHabits.map((habit, i) => (
