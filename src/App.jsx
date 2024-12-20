@@ -9,9 +9,9 @@ import Navigation from './Componenter/Navigation'
 import Events from "./Components/Events";
 import EventForm from "./Components/EventForm";
 import TodoWrapper from "./Components/TodoWrapper";
-
-
 import Login from './Login'
+import Registrera from './Registrera'
+import Quote from './Componenter/Randome'
 
 
 
@@ -22,19 +22,22 @@ function App() {
     {
       profil: "Melissa", 
       userId: 1,
-      inlog: {username: "Melissa_96", password:"123"},
+      username: "Melissa_96", 
+      password:"123",
 
     },
     {
       profil: "Ellen", 
       userId: 2,
-      inlog: {username: "Ellen_97", password: "456"}
+      username: "Ellen_97", 
+      password: "456"
     
     },
     {
       profil: "Yolanda", 
       userId: 3,
-      inlog: {username: "Yolanda_98", password: "789"}
+      username: "Yolanda_98", 
+      password: "789",
     }
   ]
 
@@ -106,6 +109,14 @@ function App() {
       const savedHabits = localStorage.getItem("habits")
       return savedHabits ? JSON.parse(savedHabits) : defaultHabits })
 
+      const addHabit = (habit) => {
+        setHabits([...habits, habit])
+      }
+    
+      const addUser = (user) => {
+        setUsers([...users, user])
+      }
+
   
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -114,14 +125,14 @@ function App() {
   }, [habits])
 
   useEffect(() => {
-    if (!localStorage.getItem("users")) {
-        localStorage.setItem("users", JSON.stringify(defaultusers));
-    }}, []);
+        localStorage.setItem("users", JSON.stringify(users));
+    }, [users]);
+
 
   const handleLogin = (user) => {
     setCurrentUser(user)
     navigate("/start")
-  }
+  } 
 
   const handleLogout = () => {
     setCurrentUser(null)
@@ -132,19 +143,18 @@ function App() {
     if(!currentUser) return []
     return habits.filter((habit) => habit.userId === currentUser.userId)
   }
- 
-  const addHabit = (habit) => {
-    setHabits([...habits, habit])
-  }
 
+  const newHabitId = () => {
+    return currentUser ? currentUser.userId : null
+  }
+  
+ 
   const [events, setEvents] = useState([]);
     
   const addEvent = (newEvent) => {
       setEvents((prevEvents) => [...prevEvents, newEvent])
   } 
-
   
-
   return (
     <>
 
@@ -153,8 +163,17 @@ function App() {
       textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}> 
       Productivity Assistant Application</h1>
 
+    {location.pathname !== "/" && location.pathname !== "/reg" && <Navigation/>}
 
-    <Navigation/>
+    {currentUser && 
+    <div>
+      <h2>Välkommen, {currentUser.profil}</h2>
+      <Quote/>
+      <button onClick={handleLogout}>Logga ut</button>
+    </div>
+      
+      }
+    
 
 
     <Routes>
@@ -162,21 +181,15 @@ function App() {
     <Route path="/" element = {<Login onLogin={handleLogin}/>} />
       <Route path="/start" element={<Startsida habits={getUserHabits()}/>} />
       <Route path="/habits" element={<Habitsx habits={getUserHabits()} setHabits={setHabits}/>}/>
-      <Route path="/newhabit" element={<NewHabit addHabit={addHabit}/>}/>
+      <Route path="/newhabit" element={<NewHabit addHabit={addHabit} newHabitId={newHabitId}/>}/>
         <Route path = "/EventForm" element= {<EventForm addEvent={addEvent} />} />
         <Route path = "/Events" element = {<Events events = {events}/>} /> 
         <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
+        <Route path = "/reg" element = {<Registrera addUser={addUser}/>}/>
         
 
     </Routes>
 
-    {currentUser && 
-    <div>
-      <h2>Välkommen, {currentUser.profil}</h2>
-      <button onClick={handleLogout}>Logga ut</button>
-    </div>
-      
-      }
 
     </>
   )
