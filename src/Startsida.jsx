@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom" 
 
 
-function Startsida({habits}) {
+function Startsida({habits }) {
 
     const navigation = useNavigate()
 
@@ -41,7 +41,7 @@ function Startsida({habits}) {
                 <h2 style={{fontFamily:"fantasy", color:"pink", 
                 textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>
                     HÄNDELSER</h2>
-            <button onClick = {() => navigation("/EventForm")}> Lägg till händelse</button>
+            <button onClick = {() => navigation("/AddEvent")}> Lägg till händelse</button>
         </div>
             <br></br>
 
