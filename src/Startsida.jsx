@@ -24,7 +24,7 @@ function Startsida({habits}) {
 
             <button onClick={() => navigation("/habits")}>Gå till Rutiner</button>
             <br></br>
-            <button onClick = {() => navigation("/EventForm")}> Lägg till händelse</button>
+            <button onClick = {() => navigation("/AddEvent")}> Lägg till händelse</button>
             <br></br>
             <button onClick ={() => navigation ("/TodoWrapper")}>Lägg till Todo </button> 
         </div>

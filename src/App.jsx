@@ -6,9 +6,10 @@ import Habitsx from './Habits.componenter/Habits'
 import NewHabit from './Habits.componenter/NewHabit'
 import Navigation from './Componenter/Navigation'
 import Events from "./Components/Events";
-import EventForm from "./Components/EventForm";
-import StartPage from "./Components/StartPage";
 import TodoWrapper from "./Components/TodoWrapper";
+import AddEvent from './Components/AddEvent'
+import "./App.css"
+
 
 
 
@@ -79,26 +80,12 @@ function App() {
       <Route path="/" element={<Startsida habits={habits}/>} />
       <Route path="/habits" element={<Habitsx habits={habits} setHabits={setHabits}/>}/>
       <Route path="/newhabit" element={<NewHabit addHabit={addHabit}/>}/>
-      <Route path = "/s" element = {<StartPage/>} />
-        <Route path = "/EventForm" element= {<EventForm addEvent={addEvent} />} />
-        <Route path = "/Events" element = {<Events events = {events}/>} /> 
-        <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
+      <Route path = "/AddEvent" element= {<AddEvent addEvent={addEvent} />} />
+      <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
 
     </Routes>
 
     </>
   )
-import { useState } from 'react'
-import Events from "./Components/Events"
-import "./App.css"
-
-
-function App () {
-  return (
-    <div>
-      <Events/>
-    </div>
-  )
 }
-
 export default App
