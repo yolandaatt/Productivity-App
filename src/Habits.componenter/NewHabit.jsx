@@ -1,18 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-function NewHabit({addHabit}) {
+function NewHabit({addHabit, newHabitId}) {
 
     let [title, setTitle] = useState("")
     let [priority, setPriority] = useState("")
     let [rep, setRep] = useState("")
-    let [userId, setUserId] = useState("")
+    let [userId, setUserId] = useState(() => newHabitId())
 
     let nav = useNavigate()
 
     const handleAddHabit = () => {
         
-        if (!title || !priority || !rep || !userId) {
+        if (!title || !priority || !rep ) {
             alert("STOP! Alla fält måste vara ifyllda för att lägga till ny rutin!");
             return;
         }
@@ -23,6 +23,7 @@ function NewHabit({addHabit}) {
             rep,
             userId,
         });
+
         nav("/habits");
     };
 
@@ -43,17 +44,7 @@ function NewHabit({addHabit}) {
     <br/>
     <input type="number" placeholder="Repetitioner"
     onChange= {e => setRep(e.target.value)}/>
-     <br/>
-
-
-     <label for="x" style={{backgroundColor:"white", color:"grey", border:"solid 1px"}}>Vem skapar detta? </label>
-     <select id="x" onChange={(e) => setUserId(Number(e.target.value))} value={userId}>
-     <option value="">Välj skapare:</option>
-     <option value={1}>Melissa</option>
-     <option value={2}>Ellen</option>
-     <option value={3} >Yolanda</option>
-     </select>
-
+    
      <br/>
      <button style={{margin:"10px"}} onClick={handleAddHabit}>Lägg till Rutin</button>        
       <br></br>

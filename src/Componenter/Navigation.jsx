@@ -8,11 +8,11 @@ const Navigation = () => {
       
                 <Link to="/start">Startsida</Link>
                 <br></br>
-                <Link to="/">Inloggning</Link>
                 
         </nav>
         </>
     )
 }
+
 
 export default Navigation
