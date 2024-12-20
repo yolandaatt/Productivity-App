@@ -15,7 +15,7 @@ function Startsida({habits, events }) {
     });
 
     return(
-        <>
+        <> 
 
         <h1>STARTSIDA</h1>
 
@@ -27,7 +27,6 @@ function Startsida({habits, events }) {
                     RUTINER</h2>
 
             {sshabits.slice(0,3).map((habit, i) => <p key = {i}>
-
                 <h5 style={{color:"#080623"}}>
                     <h2 style={{fontFamily:"fantasy", color:"pink", 
                 textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>{habit.title}</h2>
