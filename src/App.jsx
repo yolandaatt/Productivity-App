@@ -7,11 +7,10 @@ import Habitsx from './Habits.componenter/Habits'
 import NewHabit from './Habits.componenter/NewHabit'
 import Navigation from './Componenter/Navigation'
 import Events from "./Components/Events";
-import EventForm from "./Components/EventForm";
+import AddEvent from './Components/AddEvent'
 import TodoWrapper from "./Components/TodoWrapper";
 import Login from './Login'
-import Registrera from './Registrera'
-import Quote from './Componenter/Randome'
+
 
 
 
@@ -105,6 +104,7 @@ function App() {
   ]
 
 
+
   const [habits, setHabits] = useState(() => {
       const savedHabits = localStorage.getItem("habits")
       return savedHabits ? JSON.parse(savedHabits) : defaultHabits })
@@ -122,6 +122,8 @@ function App() {
     const savedUser = localStorage.getItem("currentUser")
     return savedUser ? JSON.parse(savedUser) : null
 })
+
+ 
 
   useEffect( () => {
     localStorage.setItem("habits", JSON.stringify(habits))
@@ -148,17 +150,7 @@ function App() {
     return habits.filter((habit) => habit.userId === currentUser.userId)
   }
 
-  const newHabitId = () => {
-    return currentUser ? currentUser.userId : null
-  }
-  
- 
-  const [events, setEvents] = useState([]);
-    
-  const addEvent = (newEvent) => {
-      setEvents((prevEvents) => [...prevEvents, newEvent])
-  } 
-  
+
   return (
     <>
 
@@ -182,15 +174,9 @@ function App() {
     <Routes>
      
     <Route path="/" element = {<Login onLogin={handleLogin}/>} />
-      <Route path="/start" element={<Startsida habits={getUserHabits()}/>} />
+      <Route path="/start" element={<Startsida habits={getUserHabits()} events ={getUserEvents()}/>} />
       <Route path="/habits" element={<Habitsx habits={getUserHabits()} setHabits={setHabits}/>}/>
-      <Route path="/newhabit" element={<NewHabit addHabit={addHabit} newHabitId={newHabitId}/>}/>
-        <Route path = "/EventForm" element= {<EventForm addEvent={addEvent} />} />
-        <Route path = "/Events" element = {<Events events = {events}/>} /> 
-        <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
-        <Route path = "/reg" element = {<Registrera addUser={addUser}/>}/>
-        
-    </Routes>
+   </Routes>
 
 <br></br>
 <br></br>
@@ -202,7 +188,4 @@ function App() {
     </>
   )
 }
-
-
-
-export default App;
+export default App
