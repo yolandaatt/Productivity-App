@@ -1,12 +1,18 @@
 import { useNavigate } from "react-router-dom" 
 
 
-function Startsida({habits }) {
+function Startsida({habits, events }) {
 
     const navigation = useNavigate()
 
     const sshabits = [...habits]
     .sort((a,b) => b.rep - a.rep)
+
+    const sortedEvents = [...events].sort((a, b) => {
+        const eventTimeA = new Date(`${a.endDate}T${a.endTime}`).getTime();
+        const eventTimeB = new Date(`${b.endDate}T${b.endTime}`).getTime();
+        return eventTimeA - eventTimeB;
+    });
 
     return(
         <>
@@ -41,7 +47,28 @@ function Startsida({habits }) {
                 <h2 style={{fontFamily:"fantasy", color:"pink", 
                 textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>
                     HÄNDELSER</h2>
-            <button onClick = {() => navigation("/AddEvent")}> Lägg till händelse</button>
+
+                    {sortedEvents.slice(0, 3).map((event, i) => (
+                        <div key={i}>
+                            <h5>
+                                <h2
+                                    style={{
+                                        fontFamily: "fantasy",
+                                        color: "pink",
+                                        textShadow:
+                                            "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
+                                    }}
+                                >
+                                    {event.name}
+                                </h2>
+                                Start: {event.startDate} {event.startTime}
+                                <br />
+                                Slut: {event.endDate} {event.endTime}
+                            </h5>
+                        </div>
+                    ))}
+
+            <button onClick = {() => navigation("/Events")}> Lägg till händelse</button>
         </div>
             <br></br>
 

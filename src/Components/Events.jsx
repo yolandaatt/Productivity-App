@@ -3,7 +3,8 @@ import EventItem from "./EventItem";
 import AddEvent from "./AddEvent";
 import EditEvent from "./EditEvent";
 
-function Events() {
+
+function Events({currentUser}) {
     const [events, setEvents] = useState([]);
     const [name, setName] = useState("");
     const [startTime, setStartTime] = useState("");
@@ -12,7 +13,8 @@ function Events() {
     const [endDate, setEndDate] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const [editedEvent, setEditedEvent] =useState ("");
-    // const [filterMode, setFilterMode] = useState("all")
+    const [filterMode, setFilterMode] = useState("all")
+    
     
     useEffect(() => {
         const eventsFromLocalStorage = JSON.parse(
@@ -25,13 +27,15 @@ function Events() {
      }
     }, [])
 
-
     function addEvent(e) {
+       
         e.preventDefault();
     
         const id = new Date().getTime();
+        const userId = currentUser ? currentUser.userId: null;
+
         if (name && startTime && endTime && startDate && endDate) {
-            const newEvent = { id, name, startTime, endTime, startDate, endDate };
+            const newEvent = { id, name, startTime, endTime, startDate, endDate, userId };
     
             setEvents((prevEvents) => {
                 const updatedEvents = [...prevEvents, newEvent];
@@ -93,15 +97,18 @@ function Events() {
         setEndDate("");
     }
 
-    // function toggleFilter() {
-    //     if (filterMode === "all") {
-    //         setFilterMode("upcoming")
-    //     } else if (filterMode === "upcoming") {
-    //         setFilterMode("past")
-    //     } else {
-    //         setFilterMode("all")
-    //     }
-    // }
+    function toggleFilter() {
+        if (filterMode === "all") {
+            setFilterMode("upcoming")
+        } else if (filterMode === "upcoming") {
+            setFilterMode("past")
+        } else {
+            setFilterMode("all")
+        }
+    }
+
+    const filteredEvents = events.filter((event) => event.userId === (currentUser?.userId || null));
+
 
     return (
         <div>
@@ -109,18 +116,18 @@ function Events() {
 
             {!isEditing && (
             <AddEvent 
-            addEvent={addEvent} 
-            name={name} 
-            startTime={startTime} 
-            startDate={startDate} 
-            endTime={endTime} 
-            endDate={endDate}
-            setName={setName}
-            setStartTime={setStartTime}
-            setStartDate={setStartDate}
-            setEndTime={setEndTime}
-            setEndDate={setEndDate}
-            />
+                addEvent={addEvent} 
+                name={name} 
+                startTime={startTime} 
+                startDate={startDate} 
+                endTime={endTime} 
+                endDate={endDate}
+                setName={setName}
+                setStartTime={setStartTime}
+                setStartDate={setStartDate}
+                setEndTime={setEndTime}
+                setEndDate={setEndDate}
+                />
             )}
 
             {isEditing && (
@@ -141,35 +148,35 @@ function Events() {
 
             <div>
                 <h3>Lista över händelser:</h3>
-                {/* <button onClick={toggleFilter}>
-                    {filterMode === "all" ? "Kommande Händelser": filterMode === "upcoming" ? "Tidigare Händelser": "Visa alla"} */}
-                {/* </button> */}
+                <button onClick={toggleFilter}>
+                    {filterMode === "all" ? "Kommande Händelser": filterMode === "upcoming" ? "Tidigare Händelser": "Visa alla"}
+                </button>
                 <ul>
-                    {events.slice()
+                    {filteredEvents.slice()
                     .sort((a,b) => {
 
                     const dateTimeA = new Date(`${a.endDate}T${a.endTime}`).getTime()
                     const dateTimeB = new Date(`${b.endDate}T${b.endTime}`).getTime()
                     return dateTimeA - dateTimeB
                     })
-                    // .filter ((event) => {
-                    //     const eventTime = new Date(`${event.endDate}T${event.endTime}`).getTime();
-                    //     if (filterMode === "upcoming") {
-                    //         return eventTime >= new Date().getTime()
-                    //     } else if (filterMode === "past") {
-                    //         return eventTime < new Date().getTime()
-                    //     }
-                    //     return true
-                    // })
+                    .filter ((event) => {
+                        const eventTime = new Date(`${event.endDate}T${event.endTime}`).getTime();
+                        if (filterMode === "upcoming") {
+                            return eventTime >= new Date().getTime()
+                        } else if (filterMode === "past") {
+                            return eventTime < new Date().getTime()
+                        }
+                        return true
+                    })
 
                     .map((event) => {
                         const eventTime = new Date(`${event.endDate}T${event.endTime}`).getTime();
                         
                         if (eventTime < new Date().getTime()) {
                             return (
-                                 <div>
+                                 <div key={event.id}>
                                  <EventItem
-                                    key={event.id}
+                                    
                                     deleteEvent={deleteEvent}
                                     handleEditEvent={handleEditEvent}
                                     event={event}/>
@@ -181,12 +188,14 @@ function Events() {
                         }
             
                         return (
+                            <div key={event.id}>
                             <EventItem 
-                                key={event.id}
+                                
                                 deleteEvent={deleteEvent}
                                 handleEditEvent={handleEditEvent}
                                 event={event}
                             />
+                            </div>
                         );
                     })}
                 </ul>

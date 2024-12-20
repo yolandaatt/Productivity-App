@@ -1,6 +1,6 @@
 import React from "react";
 
-function EventItem({ event, deleteEvent, handleEditEvent }) {
+function EventItem({ event, deleteEvent, handleEditEvent, }) {
         
         return (
         <div>

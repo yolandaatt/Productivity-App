@@ -7,9 +7,11 @@ import Habitsx from './Habits.componenter/Habits'
 import NewHabit from './Habits.componenter/NewHabit'
 import Navigation from './Componenter/Navigation'
 import Events from "./Components/Events";
-import TodoWrapper from "./Components/TodoWrapper";
 import AddEvent from './Components/AddEvent'
+import TodoWrapper from "./Components/TodoWrapper";
 import Login from './Login'
+import EventItem from './Components/EventItem'
+
 
 
 function App() { 
@@ -99,12 +101,15 @@ function App() {
   ]
 
 
+
   const [habits, setHabits] = useState(() => {
       const savedHabits = localStorage.getItem("habits")
       return savedHabits ? JSON.parse(savedHabits) : defaultHabits })
 
   
   const [currentUser, setCurrentUser] = useState(null);
+
+ 
 
   useEffect( () => {
     localStorage.setItem("habits", JSON.stringify(habits))
@@ -134,13 +139,26 @@ function App() {
     setHabits([...habits, habit])
   }
 
-  const [events, setEvents] = useState([]);
-    
-  const addEvent = (newEvent) => {
-      setEvents((prevEvents) => [...prevEvents, newEvent])
-  } 
-
+  const [events, setEvents] = useState(()=> {
+    const savedEvents = localStorage.getItem('events')
+    return savedEvents ? JSON.parse(savedEvents) : []
+  })
   
+
+  useEffect(() => {
+    console.log(events);
+    localStorage.setItem('events', JSON.stringify(events));
+  }, [events]);
+
+  const getUserEvents = () => {
+    if (!currentUser) return [];
+    return events.filter((event) => event.userId === currentUser.userId);
+  };
+
+  const newEventId = () => {
+   return currentUser ? currentUser.userId: null
+  };
+
 
   return (
     <>
@@ -157,12 +175,14 @@ function App() {
     <Routes>
      
     <Route path="/" element = {<Login onLogin={handleLogin}/>} />
-      <Route path="/start" element={<Startsida habits={getUserHabits()}/>} />
+      <Route path="/start" element={<Startsida habits={getUserHabits()} events ={getUserEvents()}/>} />
       <Route path="/habits" element={<Habitsx habits={getUserHabits()} setHabits={setHabits}/>}/>
       <Route path="/newhabit" element={<NewHabit addHabit={addHabit}/>}/>
       
-        <Route path = "/AddEvent" element= {<AddEvent addEvent={addEvent} />} />
-        <Route path = "/Events" element = {<Events events = {events}/>} /> 
+        
+        <Route path = "/Events" element = {<Events getUserEvents = {getUserEvents()} currentUser= {currentUser}/>} /> 
+        
+        
         <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
 
     </Routes>
