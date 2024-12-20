@@ -2,7 +2,7 @@ import React from "react";
 
 function EventItem({ event, deleteEvent, handleEditEvent, }) {
         
-        return (
+        return ( 
         <div>
         <div className="eventList">
         

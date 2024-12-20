@@ -26,7 +26,7 @@ function Events({currentUser}) {
         setEvents([])
      }
     }, [])
-
+ 
     function addEvent(e) {
        
         e.preventDefault();

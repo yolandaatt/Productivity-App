@@ -181,7 +181,7 @@ function App() {
       
         
         <Route path = "/Events" element = {<Events getUserEvents = {getUserEvents()} currentUser= {currentUser}/>} /> 
-        
+         
         
         <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
 

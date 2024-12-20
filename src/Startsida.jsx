@@ -47,7 +47,7 @@ function Startsida({habits, events }) {
                 <h2 style={{fontFamily:"fantasy", color:"pink", 
                 textShadow:"-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black"}}>
                     HÄNDELSER</h2>
-
+ 
                     {sortedEvents.slice(0, 3).map((event, i) => (
                         <div key={i}>
                             <h5>
