@@ -6,8 +6,10 @@ const Navigation = () => {
         <>
         <nav>
       
-                <Link to="/">Startsida</Link>
-
+                <Link to="/start">Startsida</Link>
+                <br></br>
+                <Link to="/">Inloggning</Link>
+                
         </nav>
         </>
     )

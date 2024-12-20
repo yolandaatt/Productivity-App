@@ -3,6 +3,11 @@
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
+    color: rgb(4, 4, 26);
+  }
+
+  body {
+    background-color: papayawhip;
   }
   
   .logo {
