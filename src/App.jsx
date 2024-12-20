@@ -118,7 +118,10 @@ function App() {
       }
 
   
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(() => {
+    const savedUser = localStorage.getItem("currentUser")
+    return savedUser ? JSON.parse(savedUser) : null
+})
 
   useEffect( () => {
     localStorage.setItem("habits", JSON.stringify(habits))
@@ -136,6 +139,7 @@ function App() {
 
   const handleLogout = () => {
     setCurrentUser(null)
+    localStorage.removeItem("currentUser")
     navigate("/")
   }
 
@@ -169,7 +173,6 @@ function App() {
     <div>
       <h2>Välkommen, {currentUser.profil}</h2>
       <Quote/>
-      <button onClick={handleLogout}>Logga ut</button>
     </div>
       
       }
@@ -187,8 +190,13 @@ function App() {
         <Route path = "/TodoWrapper" element = {<TodoWrapper/>} />
         <Route path = "/reg" element = {<Registrera addUser={addUser}/>}/>
         
-
     </Routes>
+
+<br></br>
+<br></br>
+    {currentUser && 
+    <button style={{backgroundColor:"pink", fontFamily:"fantasy"}} onClick={handleLogout}>Logga ut</button>
+    }
 
 
     </>

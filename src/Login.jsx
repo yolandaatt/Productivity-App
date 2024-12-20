@@ -14,6 +14,7 @@ const handleLogin = () => {
 
     if (user) {
     onLogin(user)
+    localStorage.setItem("currentUser", JSON.stringify(user));
 } 
     else {
     alert("Fel användarnamn/lösen")
